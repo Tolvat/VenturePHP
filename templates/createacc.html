@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset=utf8>
+ <title>${title}</title>
+ ${stylesheets}
+</head>
+<body>
+
+${top_bar}
+
+<div id="content">
+
+ <div id="register_failed" style="height: ${register_failed_box_height}px">${register_failed}</div>
+
+ <div id="panel"> 
+  <div id="title">Tworzenie nowego konta</div>
+ 
+  <form action="login.php?createacc" method="post"> 
+    <label for="username">Nazwa użytkownika:</label> 
+    <input type="text" id="username" name="username_reg">
+   
+    <label for="password">Hasło:</label> 
+    <input type="password" id="password" name="password_reg">
+    
+    <div id="lower"> 
+     <input type="submit" value="Zarejestruj się"> 
+    </div> 
+  </form> 
+ </div><br />
+
+ <div id="global">
+  Masz już konto? <a href="login.php">Zaloguj się!</a><br />
+ </div>
+</div>
+
+</body>
+</html>

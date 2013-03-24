@@ -1,0 +1,20 @@
+<div class="post">
+ <a href="post.php?view=${id}" class="post_title" title="Naciśnij, by przeczytać całość">${title}</a>
+ <div class="post_info">
+  <a href="post.php?remove=${id}" title="Usuń wpis" style="display: ${edit_display}">
+   <img src='images/page_delete.png' alt='Usuń wpis' class='img_edit_post'/>
+  </a>
+  
+  <a href="post.php?edit=${id}" title="Edytuj wpis" style="display: ${edit_display}">
+   <img src='images/page_edit.png' alt='Edytuj wpis' class='img_edit_post'/>
+  </a>
+  
+  Napisał <i>${author}</i>&nbsp;${date}
+ </div>
+ 
+ <hr>
+ 
+ <div class="post_content">
+  ${text}
+ </div>
+</div>

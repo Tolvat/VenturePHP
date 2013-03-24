@@ -1,0 +1,47 @@
+html, body
+{
+ 
+}
+
+body
+{
+ background-color: #F9F9F9; 
+}
+
+#top_bar
+{
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ background: #F1F1F1;
+ border-bottom: 1px solid #E8E8E8;
+}
+
+#content
+{
+ position: relative;
+ left: 2%;
+ width: 96%;
+ top: 78px;
+ border-radius: 2px;
+}
+
+#user_topbar
+{
+ margin-top: 10px;
+ margin-right: 5px;
+ float: right;
+ font-family: Tahoma;
+ text-align: center;
+ background-color: #e7edf0;
+ border-left: 1px solid #E8E8E8;
+ border-bottom: 1px solid #E8E8E8;
+ border-radius: 0px 2px 2px 2px;
+}
+
+#user_topbar > a
+{
+ text-decoration: none;
+ color: #789aad;
+}

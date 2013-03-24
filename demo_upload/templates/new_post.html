@@ -1,0 +1,13 @@
+<form method="post" action="post.php">
+ <label>Tytuł:</label>
+ <input type="text" style="width: 98%" name="title" value="${title}"/>
+ <br>
+
+ <label>Treść:</label>
+ <textarea name="content">${content}</textarea>
+ <div id="lower"> 
+  <input type="submit" value="Wyślij"> 
+ </div>
+ 
+ <input type="hidden" name="${hidden_name}" value="${hidden_value}"/>
+</form>

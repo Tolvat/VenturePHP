@@ -1,0 +1,9 @@
+body {
+}
+
+#register_failed {
+	font-family: Tahoma;
+	font-size: 11px;
+	
+	text-align: center;
+}

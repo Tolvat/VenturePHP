@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset=utf8>
+ <title>${title}</title>
+ ${stylesheets}
+</head>
+<body>
+
+${top_bar}
+
+<div id="content">
+
+ <div id="login_failed_box" style="height: ${login_failed_box_height}px">${login_failed}</div>
+
+ <div id="panel"> 
+  <div id="title">Logowanie</div>
+ 
+  <form action="login.php" method="post"> 
+    <label for="username">Nazwa użytkownika:</label> 
+    <input type="text" id="username" name="username">
+   
+    <label for="password">Hasło:</label> 
+    <input type="password" id="password" name="password">
+    
+    <div id="lower"> 
+     <input type="submit" value="Zaloguj się"> 
+    </div> 
+  </form> 
+ </div><br />
+
+ <div id="global">
+  Nie masz jeszcze konta? <a href="login.php?createacc">Utwórz je!</a><br />
+ </div>
+</div>
+
+</body>
+</html>
