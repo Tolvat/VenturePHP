@@ -18,7 +18,7 @@ class User
   $this->SQL = $SQL;
   $this->id  = $id;
   
-  $user = $SQL->query("SELECT * FROM users WHERE id=%1", array($id))->fetch_object();
+  $user = $this->SQL->query("SELECT * FROM users WHERE id=%1", array($id))->fetch_object();
   
   $this->login = $user->login;
   $this->group = $user->group_id;
