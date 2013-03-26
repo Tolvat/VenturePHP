@@ -67,6 +67,18 @@ class Core
   unset($this->SQL);
   unset($this->VPHP);
  }
+ 
+ /**
+  * Ta funkcja sprawdza, czy u¿ytkownik o takiej nazwie ju¿ istnieje.
+  * @param unknown $Username
+  */
+ public function isCreated($Username) {
+ 	if($this->SQL->query("SELECT login FROM users WHERE login = '$Username'") == $Username) {
+ 		return true;
+ 	}
+ 	
+ 	return false;
+ }
 }
 
 ?>

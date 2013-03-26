@@ -27,7 +27,7 @@
  
  if ($Core->POST->parse(array("username", "password"), array(&$username, &$password))) // próba logowania
  {
-  $password = sha1($password);
+  $password = sha1(md5($password));
   $query = $Core->SQL->query("SELECT * FROM users WHERE login='%1' AND password='%2'", array($username, $password));
   
   if ($query->num_rows === 0)
@@ -42,22 +42,6 @@
    
    $Core->HTML->redirect("index.php", true);
   }
- }
- 
- if ($Core->POST->parse(array("username_reg", "password_reg"), array(&$username, &$password))) { // próba rejestracji
- 	$password = sha1($password);
- 	$query = $Core->SQL->query("SELECT login FROM users WHERE login='%1'", array($username)); // sprawdzanie czy istnieje użytkownik z taką nazwą użytkownika
- 	
- 	if($query->num_rows >= 1 || empty($_POST['username_reg']) || empty($_POST['password_reg'])) {
- 		$register_failed = 1;
- 	}else{
- 		$Core->SQL->query("INSERT INTO users VALUES (0, '%1', '%2', 2)", array($username, $password));
-
- 		$register_failed = 2;
-   		
-   		// przekieruj użytkownika na stronę główną
- 		//$Core->HTML->redirect("index.php", true);
- 	}
  }
  
  if ($login_failed)

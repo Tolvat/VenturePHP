@@ -1,7 +1,7 @@
 <?php 
 
 /*
- * Klasa zarzï¿½dzajï¿½ca danym uï¿½ytkownikiem
+ * Klasa zarz¹dzaj¹ca danym u¿ytkownikiem.
  */
 class User
 {
@@ -10,8 +10,8 @@ class User
  /**
   * Konstruktor
   * 
-  * @param MySQL: wskaï¿½nik na klasï¿½ MySQL
-  * @param int: ID uï¿½ytkownika w bazie danych
+  * @param MySQL: wkaŸnik na klasê MySQL
+  * @param int: ID u¿ytkownika z bazy danych
   */
  public function __construct($SQL, $id)
  {
@@ -29,7 +29,7 @@ class User
  }
  
  /**
-  * Zwraca ID uï¿½ytkownika
+  * Zwraca ID u¿ytkowników
   */
  public function getID()
  {
@@ -37,7 +37,7 @@ class User
  }
  
  /**
-  * Zwraca login uï¿½ytkownika
+  * Zwraca login u¿ytkownika
   */
  public function getLogin()
  {
@@ -66,6 +66,10 @@ class User
  public function can_post()
  {
   return $this->SQL->query("SELECT * FROM groups WHERE id=%1", array($this->getGroupID()))->fetch_object()->can_post;
+ }
+ 
+ public function can_add_users() {
+ 	return false;
  }
  
  /**
