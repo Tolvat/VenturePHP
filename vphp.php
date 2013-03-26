@@ -22,8 +22,9 @@ class VenturePHP {
 	/**
 	 * Zmienne przechowujÄ…ce informacje nt. VenturePHP
 	 */
-	public $vphpVersion = '1.1.0';
+	public $vphpVersion = '1.1.1';
 	public $pluginList;
+	public $devMode = 1; // 1 jeœli w³¹czony, 0 jeœli wy³¹czony
 
 	/**
 	 * Konstruktor
@@ -38,15 +39,14 @@ class VenturePHP {
 	}
 	
 	/**
-	 * Zwraca tablicÄ™ z nazwami oraz gÅ‚Ã³wnymi plikami kaÅ¼dego z pluginÃ³w.
-	 * INFORMACJA: Ta funkcja nie dziaÅ‚a w Å¼aden sposÃ³b, nie jest ona uÅ¼ywana.
+	 * Zwraca tablicê z nazwami oraz g³ównymi plikami ka¹dego z pluginów.
 	 */
 	public function getPlugins() {
 		return $this->pluginList;
 	}
 	
 	/**
-	 * Zmienia wÅ‚aÅ›ciciela bloga (gÅ‚Ã³wnego administratora)
+	 * Zmienia w³aœciciela bloga (g³ównego administratora)
 	 */
 	public function setVentureOwner($newOwner) {
 		if(empty($newOwner)) {
@@ -57,21 +57,25 @@ class VenturePHP {
 	}
 	
 	/**
-	 * Zwraca wersjÄ™ VenturePHP.
+	 * Zwraca wersjê VenturePHP.
 	 */
 	public function getVentureVersion() {
 		return $this->vphpVersion;
 	}
 	
 	/**
-	 * Zwraca nazwÄ™ gÅ‚Ã³wnego administratora bloga.
+	 * Zwraca nazwê g³ównego administratora bloga.
 	 */
 	public function getBlogOwner() {
-		$query = $this->SQL->query_select("SELECT value FROM settings WHERE name = 'vphpOwner'");
-		return $this->SQL->query_select("SELECT value FROM settings WHERE name = 'vphpOwner'");
+		return $this->SQL->query_str($this->SQL->query("SELECT value FROM settings WHERE name = 'vphpOwner'"), "value");
 	}
 }
 
+/**
+ * @TODO ca³a ta klasa
+ * @author Tolvat
+ *
+ */
 class vphp_core_bbcode {
 	/**
 	 * BBCodes
@@ -121,6 +125,11 @@ class vphp_core_bbcode {
 	}
 }
 
+/**
+ * @TODO Ca³a ta klasa
+ * @author Tolvat
+ *
+ */
 class vphp_core_theme {
 	/**
 	 * Used theme
@@ -128,7 +137,7 @@ class vphp_core_theme {
 	public $theme;
 	
 	/**
-	 * Theme informations
+	 * Informacje o u¿ywanym aktualnie skinie
 	 */
 	public $theme_info = array();
 	

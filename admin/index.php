@@ -23,6 +23,10 @@
  $top_bar = new Template(null);
  $top_bar->load("acpTopBar");
  
+ if($Core->User === null) {
+ 	$Core->HTML->redirect("../index.php", true);
+ }
+ 
  // --------- TOP BAR
  $top_bar->set("user_id", $Core->User->getID());
  $top_bar->set("user_login", $Core->User->getLogin());
@@ -33,8 +37,6 @@
  $template->set("vphp_version", $Core->VPHP->getVentureVersion());
  
  $template->set("blog_owner", $Core->VPHP->getBlogOwner());
- 
- $Core->VPHP->setVentureOwner("Tolvat2");
  
  $template->render();
  

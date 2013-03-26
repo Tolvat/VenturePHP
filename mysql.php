@@ -12,13 +12,16 @@ class MySQL
   */
  public function __construct($host, $user, $pass, $db_name)
  {
-  $this->mysqli = new mysqli($host, $user, $pass, $db_name);
+   $this->mysqli = new mysqli($host, $user, $pass, $db_name);
   
-  if ($this->mysqli->connect_errno)
-  {
-   ob_clean();
-   die("Couldn't connect to MySQL server: ".$mysqli->connect_error);
-  }
+   if ($this->mysqli->connect_errno)
+   {
+    ob_clean();
+    die("Couldn't connect to MySQL server: ".$mysqli->connect_error);
+   }
+
+ 	mysql_connect($host, $user, $pass);
+ 	mysql_select_db($db_name);
  }
  
  /**
@@ -78,7 +81,7 @@ class MySQL
  }
  
  /**
-  * Wczytuje ï¿½ï¿½dany plik i wykonuje zapytania w nim zawarte.
+  * Wczytuje dany plik i wykonuje zapytania w nim zawarte.
   * Kaï¿½de zapytanie musi byï¿½ oddzielone ï¿½rednikiem `;`
   * 
   * @param string: nazwa pliku
@@ -90,20 +93,21 @@ class MySQL
    $this->query($query);
  }
  
- public function query_select($query)
- {
- 	IF(!$this->error)
- 	{
- 		IF(!$result = $this->mysqli->query($query))
- 		{
- 			$this->error = true;
- 			throw new Exception('BÅ‚Ä…d wykonania zapytania - ('.$query.') - '.$this->mysqli->error, $this->mysqli->errno);
- 		}
- 		while($row = $result->fetch_assoc())
- 		{
- 			$return[] = $row;
- 		}
- 		return $return[0];
+ /**
+  * Wykonuje zapytanie MySQL,
+  * Zaleca siê u¿ywanie go, gdy pobieramy coœ z bazy danych (np. jakiœ tekst)
+  * 
+  * Zrobi³em t¹ funkcjê, aby u³atwiæ sobie programowanie, oraz u³atwiæ innym zrozumienie kodu.
+  * 
+  * @param string $query: zapytanie
+  * @param string $return: co ma zwróciæ?
+  * @return anything
+  */
+ public function query_str($query, $return) {
+ 	while($returnValues = $query->fetch_object()) {
+ 		$returnValue = $returnValues->$return;
+ 		
+ 		return $returnValue;
  	}
  }
 }

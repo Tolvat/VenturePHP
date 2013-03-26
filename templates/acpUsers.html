@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset=utf8>
+ <title>${title}</title>
+ ${stylesheets}
+ <script src="http://127.0.0.1/templates/js/prototype.js" type="text/javascript"></script>
+ <script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+${acpTopBar}
+
+<script>
+
+$(document).ready(function(){ 
+	
+	
+	
+    function placeholder(){  
+        $("input[type=text]").each(function(){  
+            var phvalue = $(this).attr("placeholder");  
+            $(this).val(phvalue);  
+        });  
+    }  
+    placeholder();  
+    $("input[type=text]").focusin(function(){  
+        var phvalue = $(this).attr("placeholder");  
+        if (phvalue == $(this).val()) {  
+        $(this).val("");  
+        }  
+    });  
+    $("input[type=text]").focusout(function(){  
+        var phvalue = $(this).attr("placeholder");  
+        if ($(this).val() == "") {  
+            $(this).val(phvalue);  
+        }  
+    });  
+});
+
+jQuery(document).ready(function($){
+	jQuery.noConflict();
+	function sendRequest() {
+	 	new Ajax.Updater('show_results', 'users.php?search&user='+$("#searchbox").text(), {
+	 		method: 'post', parameters: $('searchform').serialize()});
+	 	});
+});
+ </script>
+
+<div id="content">
+<div id="show_results">WYNIKI:</div>
+	<div style="text-align: center;">Zarządzanie użytkownikami, rób z nimi co chcesz <strong>${user_login}</strong>!<br /><br />
+	
+	<form id="searchform" method="post" onsubmit="return false;">
+	 <input type="text" id="searchbox" onkeyup="sendRequest()" name="username" autocomplete="off" placeholder="Wpisz nazwę użytkownika..." />
+ 	</form>
+	
+	</div>
+</div>
+
+</body>
+</html>
