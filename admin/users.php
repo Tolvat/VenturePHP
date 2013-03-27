@@ -17,18 +17,20 @@ $template = $Core->HTML->Template;
 if ($Core->GET->parse(array("search"), array(&$search)))
 {
 	if(empty($_GET['user'])) {
-		echo "asd";
+		echo "";
 	} else {
-		echo "<div id='search_results'>";
-
-		$user = $_GET['user'];
-		$sql = "SELECT login FROM users WHERE login LIKE '%$user%";
-		$result = mysql_query($sql);
-
-		while($row = mysql_fetch_assoc($result)) {
-			$login = $row['login'];
-
-			echo $login;
+		$User = $_GET['user'];
+		$User = mysql_real_escape_string($User);
+		
+		$Sql = $Core->SQL->query("SELECT * FROM users WHERE login = '%1'", array($User));
+		
+		if($Sql->num_rows == 0) {
+			$Core->HTML->write("Nie odnaleziono użytkownika - <strong>" . $User . "</strong>");
+		}else{
+			$Core->HTML->write("Znaleziono użytkownika! (<strong>" . $User . "</strong>) <br /><br />");
+			// Pokaż informacje o użytkowniku
+			$Core->HTML->write("Grupa użytkownika: <strong>" . $Core->User->getGroupName($User) . "</strong> (ID grupy: " . $Core->User->getGroupID($User) . ")<br />");
+			$Core->HTML->write("Ilość napisanych postów: <strong>" . $Core->User->getPostCount($User) . "</strong><br />");
 		}
 	}
 }else{

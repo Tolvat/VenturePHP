@@ -23,9 +23,8 @@ class User
   $this->login = $user->login;
   $this->group = $user->group_id;
   
-  // By Tolvat
   $this->logged = true;
-  // By Tolvat
+  $this->posts = $user->posts;
  }
  
  /**
@@ -39,25 +38,41 @@ class User
  /**
   * Zwraca login u¿ytkownika
   */
- public function getLogin()
+ public function getLogin($Username=null)
  {
-  return $this->login; 
+ 	if($Username == null) {
+  		return $this->login;
+ 	}
  }
  
  /**
   * Zwraca ID grupy do ktï¿½rej naleï¿½y uï¿½ytkownik
   */
- public function getGroupID()
+ public function getGroupID($Username=null)
  {
-  return $this->group;
+  if($Username == null) {
+  	return $this->group;
+  } else {
+  	return $this->SQL->query_str($this->SQL->query("SELECT group_id FROM users WHERE login = '%1'", array($Username)), "group_id");
+  }
  }
  
  /**
   * Zwraca nazwï¿½ grupy do ktï¿½rej naleï¿½y uï¿½ytkownik
   */
- public function getGroupName()
+ public function getGroupName($Username=null)
  {
-  return $this->SQL->query("SELECT * FROM groups WHERE id=%1", array($this->getGroupID()))->fetch_object()->name;
+ 	if($Username == null) {
+  		return $this->SQL->query("SELECT * FROM groups WHERE id=%1", array($this->getGroupID()))->fetch_object()->name;
+ 	} else {
+ 		$Query = $this->SQL->query("SELECT * FROM groups WHERE id=%1", array($this->getGroupID($Username)))->fetch_object()->name;
+ 		
+ 		if($Query == null) {
+ 			return "<strong>TAKA GRUPA NIE ISTNIEJE!</strong>";
+ 		}else{
+ 			return $Query;
+ 		}
+ 	}
  }
  
  /**
@@ -90,6 +105,18 @@ class User
  	}
  	
  	return false;
+ }
+ 
+ /**
+  * Zwraca liczbê postów napisanych przez u¿ytkownika.
+  * Pozostaw $Username puste, jeœli chcesz pobraæ dane o zalogowaynm u¿ytkowniku.
+  */
+ public function getPostCount($Username=null) {
+ 	if($Username == null) {
+ 		return $this->posts;
+ 	}else{
+ 		return $Query = $this->SQL->query("SELECT posts FROM users WHERE login='%1'", array($Username))->fetch_object()->posts;
+ 	}
  }
 }
 ?>

@@ -20,8 +20,7 @@ class MySQL
     die("Couldn't connect to MySQL server: ".$mysqli->connect_error);
    }
 
- 	mysql_connect($host, $user, $pass);
- 	mysql_select_db($db_name);
+ 	$this->mysqli->set_charset("utf8");
  }
  
  /**
