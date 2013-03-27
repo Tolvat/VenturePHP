@@ -22,7 +22,7 @@ class VenturePHP {
 	/**
 	 * Zmienne przechowujÄ…ce informacje nt. VenturePHP
 	 */
-	public $vphpVersion = '1.1.1';
+	public $vphpVersion = '1.1.2';
 	public $pluginList;
 	public $devMode = 1; // 1 jeœli w³¹czony, 0 jeœli wy³¹czony
 

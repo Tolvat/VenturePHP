@@ -42,7 +42,7 @@ if ($Core->GET->parse(array("search"), array(&$search)))
 	$top_bar = new Template(null);
 	$top_bar->load("acpTopBar");
 
-	if($Core->User === null) {
+	if($Core->User === null || !$Core->User->isAdministrator()) {
 		$Core->HTML->redirect("../index.php", true);
 	}
 
