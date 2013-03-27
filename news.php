@@ -21,7 +21,7 @@
  
  if ($posts->num_rows === 0)
  {
-  $post_list = "<div style='text-align: center; font-family: Helvetica'>Brak postów na tej stronie.</div>";
+  $post_list = "<div style='text-align: center; font-family: Helvetica'>Brak post�w na tej stronie.</div>";
  } else
  {
   // wyświetl posty
@@ -36,6 +36,8 @@
    if ($Core->User == null)
     $can_edit = false; else // niezalogowani nie mogą edytować postów...
    	$can_edit = ($author->getLogin() === $Core->User->getLogin()); // ...a użytkownicy mogą edytować posty, o ile są ich autorami
+   
+   $text = filter_var(htmlspecialchars($text, FILTER_SANITIZE_URL));
    
    $post_template->set("id", $post->id)->
                    set("title", $post->title)->

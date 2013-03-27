@@ -63,7 +63,7 @@
                   set("title", $post->title)->
                   set("author", $author->getLogin())->
                   set("date", date("Y-m-d H:i", strtotime($post->date)))->
-                  set("text", nl2br($text))->
+                  set("text", mysql_real_escape_string(filter_var(htmlspecialchars(nl2br($text), FILTER_SANITIZE_URL))))->
                   set("edit_display", $can_edit?"inline":"none");
    
   $content .= $post_template->render_text();
