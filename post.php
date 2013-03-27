@@ -58,12 +58,13 @@
   if ($Core->User == null)
    $can_edit = false; else // niezalogowani nie mogą edytować postów...
    $can_edit = ($author->getLogin() === $Core->User->getLogin()); // ...a użytkownicy mogą edytować posty, o ile są ich autorami
-   
+  $text = filter_var(htmlspecialchars($text, FILTER_SANITIZE_URL));
+  
   $post_template->set("id", $post->id)->
                   set("title", $post->title)->
                   set("author", $author->getLogin())->
                   set("date", date("Y-m-d H:i", strtotime($post->date)))->
-                  set("text", mysql_real_escape_string(filter_var(htmlspecialchars(nl2br($text), FILTER_SANITIZE_URL))))->
+                  set("text", nl2br($text))->
                   set("edit_display", $can_edit?"inline":"none");
    
   $content .= $post_template->render_text();
