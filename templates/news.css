@@ -109,13 +109,20 @@ hr
   padding-top: -10%;	
 }
 
+.separator {
+  border: 0px solid black;
+  border-top: 1px solid #d4d4d4;
+  min-width: 104.7%;
+  margin-left: -10px;
+}
+
 #extra {
   background-color: white;
   border: 1px solid #d4d4d4; 
   width: 30%;
   padding: 5px;
   margin-right: 5%;
-  
+
   float: right;
   margin-top: 6%;
 }
