@@ -46,7 +46,7 @@
                    set("text", nl2br($text))->
                    set("edit_display", $can_edit?"inline":"none");
   	
-   $post_list .= $post_template->render_text()."</br></br>";
+   $post_list .= $post_template->render_text();
    unset($author);
   }
  }
@@ -61,6 +61,12 @@
    //dodawanie użytkowników zostanie dodane do ACP.
   }
  
+  $blog_desc = $Core->SQL->query_str($Core->SQL->query("SELECT value FROM settings WHERE name = 'vphpDesc'"), "value");
+  
+  if (strlen($blog_desc) > 500) // tekst przekracza 250 znaków
+  	$blog_desc = substr($blog_desc, 0, 500)." ...";
+ $template->set("blog_admin", $Core->SQL->query_str($Core->SQL->query("SELECT value FROM settings WHERE name = 'vphpOwner'"), "value"));
+ $template->set("blog_desc", filter_var(htmlspecialchars($blog_desc, FILTER_SANITIZE_URL)));
  $template->set("post_list", $post_list)->render();
  
  unset($Core);

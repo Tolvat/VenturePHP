@@ -30,7 +30,8 @@ if ($Core->GET->parse(array("search"), array(&$search)))
 			$Core->HTML->write("Znaleziono użytkownika! (<strong>" . $User . "</strong>) <br /><br />");
 			// Pokaż informacje o użytkowniku
 			$Core->HTML->write("Grupa użytkownika: <strong>" . $Core->User->getGroupName($User) . "</strong> (ID grupy: " . $Core->User->getGroupID($User) . ")<br />");
-			$Core->HTML->write("Ilość napisanych postów: <strong>" . $Core->User->getPostCount($User) . "</strong><br />");
+			$Core->HTML->write("Ilość napisanych postów: <strong>" . $Core->User->getPostCount($User) . "</strong><br /><br />");
+			$Core->HTML->write("<a href='edituser.php?name=" . $User . "'>Edytuj użytkownika</a>");
 		}
 	}
 }else{

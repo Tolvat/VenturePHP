@@ -31,7 +31,7 @@
  	}else if($sqlQuery == $Username) {
  		$template->set("register_failed", "Użytkownik o takiej nazwie już istnieje!");
  	}else if($sqlQuery != $Username){
- 		$Core->SQL->query("INSERT INTO users VALUES(0, '%1', '%2', 2)", array($Username, $Password_Hash));
+ 		$Core->SQL->query("INSERT INTO users VALUES(0, '%1', '%2', 2, 0)", array($Username, $Password_Hash));
  		$template->set("register_failed", "Rejestracja przebiegła pomyślnie!<br /><a href='index.php'>Kliknij, aby przejść do strony logowania</a>");
  	}
  	
