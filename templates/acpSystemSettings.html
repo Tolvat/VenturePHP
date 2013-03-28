@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset=utf8>
+ <title>${title}</title>
+ ${stylesheets}
+</head>
+<body>
+
+${acpTopBar}
+
+<div id="content">
+	<div id="under_menu">
+		<a href="index.php?settings">Ustawienia</a> &bull;
+		<a href="index.php?logo">Zmiana loga</a>
+	</div><br />
+	<div style="text-align: center; font-size: 14px;">Zarządzanie blogiem<br /><br /></div>
+	
+	<div style="text-align: center;">
+	${changeInfo}
+		<form action='#' method='post'>
+			<strong>Krótki opis bloga: </strong> <br /><textarea name="newDesc" rows="8" cols="50">${blog_desc}</textarea><br />
+			<input type="submit" name="descChange" value="Zmień">
+		</form>
+	</div>
+</div>
+
+</body>
+</html>

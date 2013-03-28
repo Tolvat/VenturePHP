@@ -4,6 +4,11 @@
  
  session_destroy();
 
+ $locked = false;
+ 
+ if($locked)
+ 	exit;
+ 
  $Core = new Core(false);
  $Core->SQL = new MySQL($config["db_host"], $config["db_user"], $config["db_pass"], null);
 

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset=utf8>
+ <title>${title}</title>
+ ${stylesheets}
+</head>
+<body>
+
+${acpTopBar}
+
+<div id="content">
+	<div id="under_menu">
+		<a href="index.php?settings">Ustawienia</a> &bull;
+		<a href="index.php?logo">Zmiana loga</a>
+	</div><br />
+	<div style="text-align: center; font-size: 14px;">Zarządzanie blogiem - zmiana loga<br /><br /></div>
+	
+	<div style="text-align: center;">
+	${logoChange}
+		<form action='#' method='post'>
+			<strong>Aktualne URL do loga (wpisz default aby użyć domyślego loga): </strong> <br /><input type="text" name="newLogoURL" value="${logo_url}"><br />
+			<input type="submit" name="logoChangeBtn" value="Zmień">
+		</form>
+	</div>
+</div>
+
+</body>
+</html>

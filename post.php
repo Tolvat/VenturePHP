@@ -58,7 +58,10 @@
   if ($Core->User == null)
    $can_edit = false; else // niezalogowani nie mogą edytować postów...
    $can_edit = ($author->getLogin() === $Core->User->getLogin()); // ...a użytkownicy mogą edytować posty, o ile są ich autorami
-  $text = filter_var(htmlspecialchars($text, FILTER_SANITIZE_URL));
+  //$text = filter_var(htmlspecialchars($text, FILTER_SANITIZE_URL)); @note: TinyMCE fix
+  $text = str_replace("<script>", "", $text);
+  $text = str_replace("<p>", "", $text);
+  $text = str_replace("</p>", "", $text);
   
   $post_template->set("id", $post->id)->
                   set("title", $post->title)->
@@ -101,8 +104,8 @@
   if (!$Core->User->can_post()) // użytkownik nie ma praw do pisania postów
    $Core->HTML->redirect("index.php", true);
   
-  $title = empty($title) ? "Niepodano tytułu." : $title;
-  $content = str_replace(array("\n", "\r\n"), "</br>", $content); // znaki nowej linii zamieniamy na `</br>`
+  $title = empty($title) ? "Brak tytułu." : $title;
+  $content = str_replace(array("\n", "\r\n"), "</br>", $content); // znaki nowej linii zamieniamy na `</br>`... ten skrypcik nie dzia�a, wi�c doda�em nl2br() :)
   $Core->SQL->query("INSERT INTO posts VALUES(0, \"%1\", \"%2\", NOW(), %3)", array($title, nl2br($content), $Core->User->getID()));
   $Core->HTML->redirect("index.php", true);
   
@@ -168,7 +171,7 @@
    $post_template = new Template($Core->HTML);
    $post_template->load("new_post")->
                    set("title", $post->title)->
-                   set("content", $post_content)->
+                   set("content", nl2br($post_content))->
                    set("hidden_name", "edit")->
                    set("hidden_value", $edit);
    

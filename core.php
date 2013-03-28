@@ -51,6 +51,12 @@ class Core
    	$this->HTML->Template->set("acpLink", "");
    }
    
+   if($this->SQL->query_str($this->SQL->query("SELECT value FROM settings WHERE name = 'vphpLogoURL'"), "value") == "default") {
+   	$this->HTML->Template->set("customLogo", "'". $config['blog_url'] . "/images/logo.png'");
+   }else{
+   	$this->HTML->Template->set("customLogo", "'" . $this->SQL->query_str($this->SQL->query("SELECT value FROM settings WHERE name = 'vphpLogoURL'"), "value") . "'");
+   }
+   
    unset($top_bar);
   }
  }

@@ -65,7 +65,9 @@ class Template
     $this->append("stylesheets", "<link rel='stylesheet' type='text/css' href='".$css."'/>");
   }
   
+  $this->append("stylesheets", "<script src='/extras/tinymce/tiny_mce.js'></script>");
   $this->append("stylesheets", "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>"); // @note: to jest z�e :F (niejednoznaczno�� nazwy zmiennej)
+  
   
   return $this;
  }

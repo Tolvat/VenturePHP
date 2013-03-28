@@ -14,7 +14,7 @@
             set("title", "Najnowsze posty");
  
  // wczytaj szablon pojedynczego postu
- $post_template->load("post_preview");
+ $post_template->load("post_home");
  
  // pobierz posty
  $posts = $Core->SQL->query("SELECT * FROM posts ORDER BY ID DESC");
@@ -30,14 +30,17 @@
    $text = $post->content;
    $author = new User($Core->SQL, $post->author_id);
    
-   if (strlen($text) > 1000) // tekst przekracza 250 znaków
+   if (strlen($text) > 1000) // tekst przekracza 1000 znaków
     $text = substr($text, 0, 1000)." ...";
    
    if ($Core->User == null)
     $can_edit = false; else // niezalogowani nie mogą edytować postów...
    	$can_edit = ($author->getLogin() === $Core->User->getLogin()); // ...a użytkownicy mogą edytować posty, o ile są ich autorami
    
-   $text = filter_var(htmlspecialchars($text, FILTER_SANITIZE_URL));
+   //$text = filter_var(htmlspecialchars($text, FILTER_SANITIZE_URL));
+   $text = str_replace("<script>", "", $text);
+   $text = str_replace("<p>", "", $text);
+   $text = str_replace("</p>", "", $text);
    
    $post_template->set("id", $post->id)->
                    set("title", $post->title)->
@@ -66,7 +69,12 @@
   if (strlen($blog_desc) > 500) // tekst przekracza 250 znaków
   	$blog_desc = substr($blog_desc, 0, 500)." ...";
  $template->set("blog_admin", $Core->SQL->query_str($Core->SQL->query("SELECT value FROM settings WHERE name = 'vphpOwner'"), "value"));
- $template->set("blog_desc", filter_var(htmlspecialchars($blog_desc, FILTER_SANITIZE_URL)));
+ $blog_desc = str_replace("<script>", "JAVASCRIPT USE: ", $blog_desc);
+ 
+ if(empty($blog_desc)) {
+ 	$blog_desc = "Brak opisu. Mo�esz ustawi� opis bloga w ACP (System -> Ustawienia -> Opis bloga)";
+ }
+ $template->set("blog_desc", nl2br($blog_desc));
  $template->set("post_list", $post_list)->render();
  
  unset($Core);

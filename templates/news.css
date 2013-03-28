@@ -7,6 +7,8 @@
   padding: 5px;
   float: left;
   margin-top: 2%;
+  font-size: 10px;
+  font-family: Tahoma;
 }
 
 .post_title
@@ -46,7 +48,7 @@
 .post_content
 {
  font-family: Tahoma;
- font-size: 13px;
+ font-size: 11px;
 }
 
 .img_edit_post
